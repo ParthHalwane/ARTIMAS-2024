@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/sweetalert.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='lib/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/sweetalert.min.js') }}"></script>
+    <title>ARTIMAS 2024 - Sign Up</title>
+    <style>
+        
+#space, .stars {
+  overflow: hidden;
+  position: absolute;
+  top: 0;  
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.stars {
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  animation: zoom 5s infinite;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stars:nth-child(1) {
+  background-position: 50% 50%;
+  animation-delay: 0s;
+}
+.stars:nth-child(2) {
+  background-position: 20% 60%;
+  animation-delay: 1s;
+}
+.stars:nth-child(3) {
+  background-position: -20% -30%;
+  animation-delay: 2s;
+}
+.stars:nth-child(4) {
+  background-position: 40% -80%;
+  animation-delay: 3s;
+}
+.stars:nth-child(5) {
+  background-position: -20% 30%;
+  animation-delay: 4s;
+}
+
+@keyframes zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+    animation-timing-function: ease-in;
+  } 
+  85% {
+    opacity: 1;
+    transform: scale(2.8);
+    animation-timing-function: linear;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.5);
+  }
+}
+        #college,#department,option
+        {
+            background-color: #ffffff;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="space">
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in"><label for="tab-1" class="tab"><a
+                    href="{{ url_for('login') }}" style="padding-bottom: 10px;">Sign In</a></label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" checked><label for="tab-2" class="tab">Sign
+                Up</label>
+            <div class="login-form">
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="sign-up-htm">
+                        <div class="group">
+                            <label for="name" class="label">Name</label>
+                            <input id="name" type="text" class="input form-control" name="name" required>
+                        </div>
+                        <div class="group">
+                          <label for="email" class="label">Email Address</label>
+                          <input id="email" type="email" class="input form-control" name="email" required>
+                        </div>
+                        <div class="group">
+                          <label for="password" class="label">Password</label>
+                          <input id="password" type="password" class="input form-control" data-type="password"
+                          name="password" required>
+                        </div>
+                        <div class="group">
+                            <label for="college" class="label">College</label>
+<!--                             <input id="college" type="text" class="input form-control" name="college" required> -->
+                             <select name="college" class="form-control input browser-default custom-select" required>
+                              <option value="" disabled selected>Select the college</option>
+
+                            <!-- PCCOE -->
+                            <option name="College" id="college" class="form-control input" data-college="PCCOE" value="PCCOE">PCCOE</option>
+                            
+                            <!-- PCCOER -->
+                            <option name="College" id="college" class="form-control input" data-college="PCCOER" value="PCCOER">PCCOER</option>
+                            
+                            <!-- DYP Akurdi -->
+                            <option name="College" id="college" class="form-control input" data-college="DYP-AKURDI" value="DYP-AKURDI">DYP Akurdi</option>
+                            
+                            <!-- DYP Pimpri -->
+                            <option name="College" id="college" class="form-control input" data-college="DYP-PIMPRI" value="DYP-PIMPRI">DYP Pimpri</option>
+                            
+                            <!-- VIT Pune -->
+                            <option name="College" id="college" class="form-control input" data-college="VIT-PUNE" value="VIT-PUNE">VIT Pune</option>
+                            
+                            <!-- PICT -->
+                            <option name="College" id="college" class="form-control input" data-college="PICT" value="PICT">PICT</option>
+                            
+                            <!-- COEP -->
+                            <option name="College" id="college" class="form-control input" data-college="COEP" value="COEP">COEP</option>
+                            
+                            <!-- MIT WPU -->
+                            <option name="College" id="college" class="form-control input" data-college="MIT-WPU" value="MIT-WPU">MIT WPU</option>
+
+                            <!-- PCU -->
+                            <option name="College" id="college" class="form-control input" data-college="PCU" value="PCU">PCU</option>
+                        
+                            <!-- NCER -->
+                            <option name="College" id="college" class="form-control input" data-college="NCER" value="NCER">NCER</option>
+                            
+                            <!-- NMIET -->
+                            <option name="College" id="college" class="form-control input" data-college="NMIET" value="NMIET">NMIET</option>
+                             
+
+                            
+                            </select>
+                        </div>
+                        <div class="group">
+                          <label for="department" class="label">Department</label>
+<!--                           <input id="department" type="text" class="input form-control" name="department" required> -->
+                            <select name="department" class="form-control input browser-default custom-select" required>
+                              <option value="" disabled selected>Select the department</option>
+                              
+                              <option name="Department" id="department" class="form-control input" data-department="CHEM" value="CHEM">Chemical
+                                Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="COMP" value="COMP">Computer
+                                Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="E&TC" value="E&TC">E & TC
+                                Engineering (Electronics & Telecommunication Engineering)</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="IT" value="IT">Information
+                                Technology</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="INST" value="INST">
+                                Instrumentation
+                                & Control Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="MECH" value="MECH">Mechanical
+                                Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="AI-DS" value="AI-DS">
+                                Artificial
+                                Intelligence and Data Science</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="CS-AI" value="CS-AI">Computer
+                                Sciences & Engineering (Artificial Intelligence)</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="CS-ML" value="CS-ML">Computer
+                                Sciences & Engineering (Artificial Intelligence & Machine Learning)</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="CIVIL" value="CIVIL">Civil
+                                Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="EE" value="EE">Electrical
+                                Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="ROBOT" value="ROBOT">Robotics
+                                and
+                                Automation</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="ESH" value="ESH">Engineering,
+                                Science and Humanities</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="IPE" value="IPE">Industrial &
+                                Production Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="MMT" value="MMT">Metallurgy &
+                                Material Technology</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="MSE" value="MSE">Manufacturing
+                                Science & Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="BIOE" value="BIOE">
+                                Bioengineering
+                              </option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="CS-CYBER" value="CS-CYBER">
+                                Computer Science And Engineering (Cyber Security And Forensics)</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="ECE" value="ECE">Electrical
+                                And
+                                Computer Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="ECE-AIML" value="ECE-AIML">
+                                Electronics And Communication Engineering (Artificial Intelligence And Machine Learning)</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="MSE" value="MSE">Materials
+                                Science
+                                And Engineering</option>
+                          
+                              <option name="Department" id="department" class="form-control input" data-department="PE" value="PE">Petroleum
+                                Engineering</option>
+                          
+                            </select>
+                      </div>
+                      <div class="group">
+                        <label for="phone" class="label">Phone No. (10 digits)</label>
+                        <input id="phone" type="tel" pattern="[0-9]{10}" class="input form-control" name="phone" required>
+                    </div>
+                        <div class="group">
+                            <button type="submit" class="button">Sign Up</button>
+                        </div>
+                    </div>
+                </form>
+              
+            </div>
+            {% if message %}
+            <div class="message" data-type="{{ message_type }}" style="display: none;">{{ message }}</div>
+            {% endif %}
+            <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              swal("Info", 'If you belong to PCCOE please use your College email.', "info");
+            if (document.querySelector('.message')) {
+                var messageType = document.querySelector('.message').getAttribute('data-type');
+                var messageText = document.querySelector('.message').textContent;
+
+                if (messageType === 'success') {
+                    swal("Success", messageText, "success");
+                } else if (messageType === 'warning') {
+                    swal("Error", messageText, "warning");
+                } else if (messageType === 'error') {
+                    swal("Error", messageText, "error");
+                }
+            }
+        });
+            </script>
+        </div>
+    </div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    <div class="stars"></div>
+    </div>
+</body>
+
+</html>
