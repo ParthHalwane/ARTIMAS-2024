@@ -742,10 +742,10 @@ def verify_person(event):
         return jsonify({'exists': True, 'error': 'Member does not have an account yet'})
 
 
-@app.route('/profile')
-@login_required
-def profile():
-    return render_template('profile.html', user=current_user)
+# @app.route('/profile')
+# @login_required
+# def profile():
+#     return render_template('profile.html', user=current_user)
 
 # @app.route('/temp_dash')
 # @login_required
