@@ -454,6 +454,58 @@
     .logo-details img {
         width: max(7vh, 100px);
     }
+
+    .toast_for_aimsa {
+        visibility: visible;
+        background-color: #3333337e;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 7vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Close button style */
+    .close-button {
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        /* padding: 8px; */
+        right: 10px;
+        margin-bottom: 10px;
+        /* top: 50%; */
+        /* Add padding to make the button more clickable */
+        /* margin-right: 5vw; */
+        /* Add margin to separate the button from the message */
+        background-color: rgba(252, 0, 0, 0.387);
+        /* Semi-transparent background */
+        border: none;
+        border-radius: 50%;
+        /* Make the button circular */
+    }
+
+    /* Show the toast */
+    .show {
+        animation: fadeIn 0.5s;
+    }
+
+    /* Animation for showing the toast */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
 </style>
 
 <body>
@@ -476,12 +528,12 @@
                             </a></li>
                         <li><a href="{{ url_for('sponsors') }}"><b>Sponsors</b>
                             </a></li>
-                         <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span>
+                        <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span>
                                 <b>Profile</b></a></li>
                         <!-- {% if current_user.is_authenticated %} -->
                         <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>
                                 <b>Logout</b> </a></li>
-                       
+
 
                         <!-- {% else %} -->
                         <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>
@@ -524,15 +576,16 @@
 
                 <div class="blog-slider__item swiper-slide">
                     <div class="blog-slider__img" style="padding: 0px 4px; padding-top: -4px;">
-                        <img src="https://i.ibb.co/PGKYwyz/ACTION-HH.jpg"
-                            alt="">
+                        <img src="https://i.ibb.co/PGKYwyz/ACTION-HH.jpg" alt="">
                     </div>
                     <div class="blog-slider__content">
                         <span class="blog-slider__code">23 February 2024</span>
                         <div class="blog-slider__title">Houdini Heist</div>
-                        <div class="blog-slider__text">Join Houdini's Quest , Solve Puzzles with Zest, Break free from the Heist, be put to the Test</div>
+                        <div class="blog-slider__text">Join Houdini's Quest , Solve Puzzles with Zest, Break free from
+                            the Heist, be put to the Test</div>
                         <a href="/houdiniheist" class="blog-slider__button1">Register</a>
-                        <a href="https://drive.google.com/file/d/1OxKinSvDbYXrBrgSWatVf75YABkCfMA-/view?usp=drive_link" class="blog-slider__button2">Rulebook</a>
+                        <a href="https://drive.google.com/file/d/1OxKinSvDbYXrBrgSWatVf75YABkCfMA-/view?usp=drive_link"
+                            class="blog-slider__button2">Rulebook</a>
 
                     </div>
                 </div>
@@ -555,8 +608,14 @@
 
     </div>
 
+    <div id="toast_for_aimsa" class="toast_for_aimsa">
+        <span id="toast-message">Zoom-In to Explore into the Universe</span>
+        <button class="close-button" onclick="closeToast()">x</button>
+    </div>
+
 
     <script>
+
         let renderer, scene, camera, sphereBg, stars, controls, container = document.getElementById("canvas_container");
         let timeout_Debounce;
         let cameraSpeed = 0;
@@ -679,6 +738,7 @@
 
 
         }
+
 
         function init() {
             scene = new THREE.Scene();
@@ -840,17 +900,17 @@
             document.querySelector('.blog-slider__title').innerText = postTitles[p];
             document.querySelector('.blog-slider__code').innerText = postDates[p];
             document.querySelector('.blog-slider__text').innerText = postContents[p];
-            if (p==4){
+            if (p == 4) {
                 document.querySelector('.blog-slider__button1').style.display = 'none';
                 // document.querySelector('.blog-slider__button2').style.display = 'none';
                 document.querySelector('.blog-slider__button2').href = rulebooks[p];
 
             }
-            else{
-            document.querySelector('.blog-slider__button1').style.display = 'block';
-            // document.querySelector('.blog-slider__button2').style.display = 'block';
-            document.querySelector('.blog-slider__button1').href = postLinks[p];
-            document.querySelector('.blog-slider__button2').href = rulebooks[p];
+            else {
+                document.querySelector('.blog-slider__button1').style.display = 'block';
+                // document.querySelector('.blog-slider__button2').style.display = 'block';
+                document.querySelector('.blog-slider__button1').href = postLinks[p];
+                document.querySelector('.blog-slider__button2').href = rulebooks[p];
             }
 
 
@@ -976,13 +1036,18 @@
                 document.removeEventListener('wheel', wheelHandler);
             }
         }
-
+-
         document.addEventListener('wheel', wheelHandler);
 
         document.getElementById('tooltip').addEventListener('click', function () {
             var tooltipContent = document.getElementById('tooltip-content');
             tooltipContent.style.display = (tooltipContent.style.display === 'block') ? 'none' : 'block';
         });
+
+        function closeToast() {
+            var toast = document.getElementById("toast_for_aimsa");
+            toast.style.visibility = "hidden";
+        }
     </script>
 
 </body>
