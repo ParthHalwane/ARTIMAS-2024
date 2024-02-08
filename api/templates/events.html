@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/three@0.139.2/build/three.min.js"></script>
     <script src="https://unpkg.com/three@0.139.2/examples/js/controls/OrbitControls.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -446,8 +447,9 @@
         cursor: pointer;
         /* width: 40px;  Adjust the width and height as needed */
         /* height: 15px; Adjust the width and height as needed */
-        display: none;
+        /* display: none; */
         align-items: center;
+        margin-left: 6px;
         justify-content: center;
     }
 
@@ -595,8 +597,7 @@
     </div>
 
     <div class="logo-details">
-        <a href="https://www.pccoeaimsa.org/"><img
-                src="{{ url_for('static', filename='images/Aimsa_resized.png') }}"></img></a>
+        <a href="{{ url_for('contact') }}"><i class="fas fa-phone contact-icon" style="color: white; border:2px solid white ;border-radius: 50%; padding: 4px;"></i></a>
         <!-- <span class="logo_name">AiMSA</span> -->
     </div>
 
@@ -679,7 +680,7 @@
             'https://drive.google.com/file/d/1YIBoSjEMq4bSAaQUl0iEMVKSzG3vmJt-/view?usp=sharing',
             'https://drive.google.com/file/d/1dpkohSZ3PnWRv2AA7XMxKbyRT47S9urL/view?usp=drive_link',
             'https://drive.google.com/file/d/1y02i_C07Yr7WDGawuJLsrql0TyZWRgXN/view?usp=drive_link',
-            '/events',
+            'https://drive.google.com/file/d/1OyZ6Ux4hmQAd0J4cpuuYXjXMAAgsOk-g/view?usp=drivesdk',
             'https://drive.google.com/file/d/1bA8eJC0ePheE2U6Y50wOL9o6QDMVNhT7/view?usp=drive_link',
             // Add more links as needed
         ];
@@ -1036,8 +1037,8 @@
                 document.removeEventListener('wheel', wheelHandler);
             }
         }
--
-        document.addEventListener('wheel', wheelHandler);
+        -
+            document.addEventListener('wheel', wheelHandler);
 
         document.getElementById('tooltip').addEventListener('click', function () {
             var tooltipContent = document.getElementById('tooltip-content');
