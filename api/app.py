@@ -753,8 +753,7 @@ def profile():
 #     return render_template('temp_dash.html', user=current_user)
 
 @app.route('/contact')
-# # @login_required
-def temp_team():
+def contact():
     return render_template('contact.html')
 
 
