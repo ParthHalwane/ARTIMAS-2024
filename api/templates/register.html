@@ -22,6 +22,7 @@
 
     body{
       background-color: black;
+      /* overflow: scroll; */
     }
   @import url(https://fonts.googleapis.com/css?family=Orbitron:700);
 
@@ -264,9 +265,9 @@
                   required>
               </div>
               <div class="group">
-                <label for="college" class="label">College</label>
+                <label for="college" class="label" >College</label>
                 <!--                             <input id="college" type="text" class="input form-control" name="college" required> -->
-                <select name="college" class="form-control input browser-default custom-select" required>
+                <select name="college" class="form-control input browser-default custom-select" required style="padding: 0px 10px;">
                   <option value="" disabled selected>Select the college</option>
 
                   <!-- PCCOE -->
@@ -321,9 +322,9 @@
                 </select>
               </div>
               <div class="group">
-                <label for="department" class="label">Department</label>
+                <label for="department" class="label" >Department</label>
                 <!--                           <input id="department" type="text" class="input form-control" name="department" required> -->
-                <select name="department" class="form-control input browser-default custom-select" required>
+                <select name="department" class="form-control input browser-default custom-select" required style="padding:0px 10px">
                   <option value="" disabled selected>Select the department</option>
 
                   <option name="Department" id="department" class="form-control input" data-department="CHEM"
