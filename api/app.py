@@ -752,10 +752,10 @@ def profile():
 # def temp_dash():
 #     return render_template('temp_dash.html', user=current_user)
 
-# @app.route('/temp_team')
+@app.route('/contact')
 # # @login_required
-# def temp_team():
-#     return render_template('team_registeration.html', user=current_user)
+def temp_team():
+    return render_template('contact.html')
 
 
 @app.route('/<path:undefined_route>')
