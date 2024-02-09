@@ -750,7 +750,7 @@ def profile():
 @app.route('/registercount')
 @login_required
 def registration_count():
-    if current_user.email == 'aimsa.pccoepune.org':
+    if current_user.email == 'parthhalwane@gmail.com' or current_user.email == 'prathmesh.kolekar21@pccoepune.org':
 
         user_count = db.users.count_documents({})  # Counting documents in the users collection
         return jsonify({'user_count': user_count})  # Returning JSON response with user count
