@@ -747,6 +747,16 @@ def verify_person(event):
 def profile():
     return render_template('profile.html', user=current_user)
 
+@app.route('/registercount')
+@login_required
+def registration_count():
+    if current_user.email == 'aimsa.pccoepune.org':
+
+        user_count = db.users.count_documents({})  # Counting documents in the users collection
+        return jsonify({'user_count': user_count})  # Returning JSON response with user count
+    else:
+        return render_template('index.html')
+
 # @app.route('/temp_dash')
 # @login_required
 # def temp_dash():
