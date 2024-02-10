@@ -15,6 +15,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 
+current_user = {}
+
 app.config['MONGO_URI'] = 'mongodb://parthhalwane:artimas2024pccoe@ac-yjnwgro-shard-00-00.ewdp2pv.mongodb.net:27017,ac-yjnwgro-shard-00-01.ewdp2pv.mongodb.net:27017,ac-yjnwgro-shard-00-02.ewdp2pv.mongodb.net:27017/?replicaSet=atlas-1276tn-shard-0&ssl=true&authSource=admin'
 # app.config['SECRET_KEY'] = 'your_secret_key'
 # app.config['MAIL_SERVER'] = 'smtp.gmail.com'
@@ -176,14 +178,14 @@ def verify_email(token):
 
 
 @app.route('/events')
-# @login_required
+# # @login_required
 def events():
     # print(current_user.events)
     return render_template('events.html', user=current_user)
 
 
 @app.route('/logout')
-@login_required
+# @login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
@@ -223,31 +225,31 @@ def sponsors():
     return render_template('sponsors.html')
   
 @app.route('/houdiniheist')
-@login_required
+# @login_required
 def houdini_heist():
     return render_template('register_houdiniheist.html', user=current_user)
 
 
 @app.route('/neurodrain')
-@login_required
+# @login_required
 def neurodrain():
     return render_template('register_neurodrain.html', user=current_user)
 
 
 @app.route('/pixelperfect')
-@login_required
+# @login_required
 def pixelperfect():
     return render_template('register_pixelperfect.html', user=current_user)
 
 
 @app.route('/hackmatrix')
-@login_required
+# @login_required
 def hackmatrix():
     return render_template('register_hackmatrix.html', user=current_user)
 
 
 @app.route('/amongus')
-@login_required
+# @login_required
 def amongus():
     return render_template('register_amongus.html', user=current_user)
 
@@ -256,6 +258,7 @@ def amongus():
 def submit_neurodrain():
     event = 'neurodrain'
     event_collection = db[event]
+    usersdb = db['users']
     msg = None
 
     try:
@@ -287,6 +290,37 @@ def submit_neurodrain():
                 is_pccoe = False
 
         current_date = datetime.datetime.today()
+
+        userx = usersdb.find({'email': request.form.get('Email')})
+        # print(list(userx))
+        # print(len(list(userx)))
+
+        email = request.form.get('Email')
+        if len(list(userx))==0:
+                # If the user doesn't exist, add them to the database
+            # user_data = {}
+            # print(userx)
+            
+            name = request.form.get('Name')
+            email = request.form.get('Email')
+            # password = request.form.get('Password')
+            college = request.form.get('College')
+            department = request.form.get('Department')
+            phone = request.form.get('Phone')
+            user_data = {'name':name
+                         ,'email':email
+                         ,'college':college
+                         ,'department':department
+                         ,'phone':phone
+                         ,'verified': True
+                         ,'events':[event]}
+            usersdb.insert_one(user_data)
+        else:
+    # If the user exists, append the event to their events array
+            # event_data = {'event': 'your_event_data_here'}
+            usersdb.update_one({'email': email}, {'$push': {'events': event}})
+
+
 
         if 'pccoepune.org' in request.form.get('Email'):
             subject = 'Event Registration Confirmation'
@@ -321,8 +355,8 @@ def submit_neurodrain():
         # event_collection.insert_one(event_data)
 
         # Update the events array for the current user
-        db.users.update_one({'email': request.form.get('Email')}, {
-                            '$push': {'events': event}})
+        # db.users.update_one({'email': request.form.get('Email')}, {
+        #                     '$push': {'events': event}})
 
         # subject = 'Event Registration Confirmation'
         # template = render_template('registeration_confirmation.html',user_name = request.form.get('Name'),event=event)  # Adjust the path to your HTML template
@@ -340,6 +374,7 @@ def submit_neurodrain():
 def submit_amongus():
     event = 'amongus'
     event_collection = db[event]
+    usersdb = db['users']
     msg = None
 
     try:
@@ -371,6 +406,37 @@ def submit_amongus():
                 is_pccoe = False
 
         current_date = datetime.datetime.today()
+
+        userx = usersdb.find({'email': request.form.get('Email')})
+        # print(list(userx))
+        # print(len(list(userx)))
+
+        email = request.form.get('Email')
+        if len(list(userx))==0:
+                # If the user doesn't exist, add them to the database
+            # user_data = {}
+            # print(userx)
+            
+            name = request.form.get('Name')
+            email = request.form.get('Email')
+            # password = request.form.get('Password')
+            college = request.form.get('College')
+            department = request.form.get('Department')
+            phone = request.form.get('Phone')
+            user_data = {'name':name
+                         ,'email':email
+                         ,'college':college
+                         ,'department':department
+                         ,'phone':phone
+                         ,'verified': True
+                         ,'events':[event]}
+            usersdb.insert_one(user_data)
+        else:
+    # If the user exists, append the event to their events array
+            # event_data = {'event': 'your_event_data_here'}
+            usersdb.update_one({'email': email}, {'$push': {'events': event}})
+
+
 
         if 'pccoepune.org' in request.form.get('Email'):
             subject = 'Event Registration Confirmation'
@@ -405,11 +471,11 @@ def submit_amongus():
         # event_collection.insert_one(event_data)
 
         # Update the events array for the current user
-        db.users.update_one({'email': request.form.get('Email')}, {
-                            '$push': {'events': event}})
+        # db.users.update_one({'email': request.form.get('Email')}, {
+        #                     '$push': {'events': event}})
 
         # subject = 'Event Registration Confirmation'
-        # template = render_template('registeration_confirmation.html',user_name = request.form.get('Name'),event=event)
+        # template = render_template('registeration_confirmation.html',user_name = request.form.get('Name'),event=event)  # Adjust the path to your HTML template
         # send_email(subject,request.form.get('Email'), template )
 
         db[event].insert_one(event_data)
@@ -418,12 +484,13 @@ def submit_amongus():
     except Exception as e:
         print(e)
         return jsonify({'success': False, 'message': 'Error storing form data.'}), 500
-
+    
 
 @app.route('/submitForm/pixelperfect', methods=['POST'])
 def submit_pixelperfect():
     event = 'pixelperfect'
     event_collection = db[event]
+    usersdb = db['users']
     msg = None
 
     try:
@@ -455,6 +522,30 @@ def submit_pixelperfect():
                 is_pccoe = False
 
         current_date = datetime.datetime.today()
+
+        userx = usersdb.find({'email': request.form.get('Email')})
+        # print(list(userx))
+        # print(len(list(userx)))
+
+        email = request.form.get('Email')
+        if len(list(userx)) == 0:
+            # If the user doesn't exist, add them to the database
+            # user_data = {}
+            # print(userx)
+
+            name = request.form.get('Name')
+            email = request.form.get('Email')
+            # password = request.form.get('Password')
+            college = request.form.get('College')
+            department = request.form.get('Department')
+            phone = request.form.get('Phone')
+            user_data = {'name': name, 'email': email, 'college': college,
+                         'department': department, 'phone': phone, 'verified': True, 'events': [event]}
+            usersdb.insert_one(user_data)
+        else:
+            # If the user exists, append the event to their events array
+            # event_data = {'event': 'your_event_data_here'}
+            usersdb.update_one({'email': email}, {'$push': {'events': event}})
 
         if 'pccoepune.org' in request.form.get('Email'):
             subject = 'Event Registration Confirmation'
@@ -489,8 +580,8 @@ def submit_pixelperfect():
         # event_collection.insert_one(event_data)
 
         # Update the events array for the current user
-        db.users.update_one({'email': request.form.get('Email')}, {
-                            '$push': {'events': event}})
+        # db.users.update_one({'email': request.form.get('Email')}, {
+        #                     '$push': {'events': event}})
 
         # subject = 'Event Registration Confirmation'
         # template = render_template('registeration_confirmation.html',user_name = request.form.get('Name'),event=event)  # Adjust the path to your HTML template
@@ -507,6 +598,8 @@ def submit_pixelperfect():
 @app.route('/submitForm/houdiniheist', methods=['POST'])
 def submit_houdiniheist():
     event = 'houdiniheist'
+    usersdb = db['users']
+
     c = 0
     try:
         # form_data = request.form  # Use request.form to get form data
@@ -561,9 +654,26 @@ def submit_houdiniheist():
             if 'pccoepune.org' in member_email:
                 c += 1
 
+            userx = usersdb.find({'email': member_email})
+            # print(list(userx))
+            # print(len(list(userx)))
+
+            email = request.form.get(f'email{i}')
             if member_email != 'aimsa.pccoepune.org':
-                db.users.update_one({'email': member_email}, {
-                                    '$push': {'events': event}})
+                if len(list(userx)) == 0:
+                    name = request.form.get(f'name{i}')
+                    email = request.form.get(f'email{i}')
+                    # password = request.form.get('Password')
+                    college = request.form.get(f'college{i}')
+                    department = request.form.get(f'department{i}')
+                    phone = request.form.get(f'phone{i}')
+                    user_data = {'name': name, 'email': email, 'college': college,
+                                'department': department, 'phone': phone, 'verified': True, 'events': [event]}
+                    usersdb.insert_one(user_data)
+
+                else:
+                    db.users.update_one({'email': member_email}, {'$push': {'events': event}})
+                  
                 # print()
                 member_entry = {
                     'name': form_data.get(f'name{i}', ''),
@@ -617,6 +727,8 @@ def submit_houdiniheist():
 @app.route('/submitForm/hackmatrix', methods=['POST'])
 def submit_hackmatrix():
     event = 'hackmatrix'
+    usersdb = db['users']
+
     try:
         # form_data = request.form  # Use request.form to get form data
         # Convert to a flat dictionary
@@ -670,17 +782,33 @@ def submit_hackmatrix():
 
             if 'pccoepune.org' in member_email:
                 c += 1
-            if member_email != 'aimsa.pccoepune.org':
-                db.users.update_one({'email': member_email}, {
-                                    '$push': {'events': event}})
-                # print()
+            # if member_email != 'aimsa.pccoepune.org':
+            userx = usersdb.find({'email': member_email})
+            # print(list(userx))
+            # print(len(list(userx)))
 
+            email = request.form.get(f'email{i}')
+            if member_email != 'aimsa.pccoepune.org':
+                if len(list(userx)) == 0:
+                    name = request.form.get(f'name{i}')
+                    email = request.form.get(f'email{i}')
+                    # password = request.form.get('Password')
+                    college = request.form.get(f'college{i}')
+                    department = request.form.get(f'department{i}')
+                    phone = request.form.get(f'phone{i}')
+                    user_data = {'name': name, 'email': email, 'college': college,
+                                'department': department, 'phone': phone, 'verified': True, 'events': [event]}
+                    usersdb.insert_one(user_data)
+
+                else:
+                    db.users.update_one({'email': member_email}, {'$push': {'events': event}})
+                  
+                # print()
                 member_entry = {
                     'name': form_data.get(f'name{i}', ''),
                     'email': form_data.get(f'email{i}', ''),
                     'college': form_data.get(f'college{i}', ''),
                     'phone': form_data.get(f'phone{i}', ''),
-                    'github' : form_data.get(f'github{i}', ''),
                 }
 
             else:
@@ -689,10 +817,8 @@ def submit_hackmatrix():
                     'email': '',
                     'college': '',
                     'phone': '',
-                    'github': '',
                 }
             members.append(member_entry)
-        # print(members[0]['name'],members[0])
         if c == 4:
             is_pccoe = True
             subject = 'Event Registration Confirmation'
@@ -730,7 +856,7 @@ def verify_person(event):
     email_to_verify = request.args.get('email')
     # event_collection = db[event]
 
-    user = db.users.find_one({'email': email_to_verify, 'verified': True})
+    user = db.users.find_one({'email': email_to_verify})
 
     if user:
         # print(user)
@@ -743,12 +869,12 @@ def verify_person(event):
 
 
 @app.route('/profile')
-@login_required
+# @login_required
 def profile():
     return render_template('profile.html', user=current_user)
 
 @app.route('/registercount')
-@login_required
+# @login_required
 def registration_count():
     if current_user.email == 'parthhalwane@gmail.com' or current_user.email == 'prathmesh.kolekar21@pccoepune.org':
 
@@ -758,7 +884,7 @@ def registration_count():
         return render_template('index.html')
 
 # @app.route('/temp_dash')
-# @login_required
+# # @login_required
 # def temp_dash():
 #     return render_template('temp_dash.html', user=current_user)
 
