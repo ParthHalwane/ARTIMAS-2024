@@ -318,7 +318,7 @@ function validateForm(event) {
         type: 'GET',
         data: { email: document.getElementById('email').value },
         success: function (data) {
-            if (false && !(document.getElementById('email').value === '')) {
+            if (data.error=='Member already registered for the event.' && !(document.getElementById('email').value === '')) {
                 swal('Error',data.error,'warning');
             } 
             else {
