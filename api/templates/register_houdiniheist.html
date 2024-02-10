@@ -641,7 +641,7 @@
                     type: 'GET',
                     data: { email: document.getElementById(`email${currentPage}`).value },
                     success: function (data) {
-                        if (data.error!='Member does not have an account yet' && !(document.getElementById(`email${currentPage}`).value === '')) {
+                        if (data.error=='Member already registered for the event.' && !(document.getElementById(`email${currentPage}`).value === '')) {
                             swal("Oops !", "Member already Registered for this Event", "error");
                         } else {
                             currentPage += 1;

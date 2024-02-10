@@ -359,7 +359,7 @@ function submitForm() {
     submitButton.disabled = true;
     const formData = new FormData(document.getElementById('regForm'));
 
-    swal('Proceed','Submitting your form','info');
+    swal('Proceed','Submitting your form , you will recieve a Registration Email shortly','info');
 
     // Append the payment screenshot to the form data
     formData.append('paymentScreenshot', paymentScreenshot);
