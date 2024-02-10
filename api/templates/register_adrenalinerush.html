@@ -188,7 +188,7 @@ function validateForm(event) {
         type: 'GET',
         data: { email: document.getElementById('email').value },
         success: function (data) {
-            if (data.exists && !(document.getElementById('email').value === '')) {
+            if (data.error!='Member does not have an account yet' && !(document.getElementById('email').value === '')) {
                 swal('Error',data.error,'warning');
             } 
             else {
@@ -197,7 +197,7 @@ function validateForm(event) {
                     submitForm();
                 } else {
                     // Prompt for payment
-                    swal('Wait','Member is not from PCCOE. Proceed with payment.','warning');
+                    swal('Wait','Member is not from PCCOE. Proceed with payment. (Incase you belong to PCCOE ,use College Email)','warning');
                     event.preventDefault();
                     // Show the payment section
                     const paymentSection = document.getElementById('paymentSection');
@@ -232,7 +232,7 @@ function submitForm() {
     submitButton.disabled = true;
     const formData = new FormData(document.getElementById('regForm'));
 
-    swal('Proceed','Submitting your form','info');
+    swal('Proceed','Submitting your form , you will recieve a Registration Email shortly','info');
 
     // Append the payment screenshot to the form data
     formData.append('paymentScreenshot', paymentScreenshot);
@@ -247,7 +247,7 @@ function submitForm() {
         processData: false,
         success: function (data) {
             // Handle success, e.g., show a success message
-            swal("Success", "Registration done successfully", "success");
+            swal("Success", "Form Submitted Successfully", "success");
             submitButton.disabled = false;
             window.location.href = '/events';
 

@@ -444,15 +444,7 @@
                                 </a></li>
                               <li><a href="{{ url_for('sponsors') }}"> <b>Sponsors</b>
                                 </a></li>
-                            <!-- {% if current_user.is_authenticated %} -->
                            
-                            <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span> <b>Profile</b></a></li>
-				 <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>
-                                    <b>Logout</b> </a></li>
-                            <!-- {% else %} -->
-                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> <b>Login</b>
-                                </a></li>
-                            <!-- {% endif %} -->
                         </div>
                     </ul>
                 </div>
@@ -470,19 +462,23 @@
                         <div class="sign-up-htm">
                             <div class="group">
                                 <label for="name1" class="label">Name of Team Leader</label>
-                                <input type="text" id="name1" name="name1" class="input form-control" value="{{ user.name }}" required readonly>
+                                <input type="text" id="name1" name="name1" class="input form-control" value="{{ user.name }}" required  >
                             </div>
                             <div class="group">
                                 <label for="email1" class="label">Email of Team Leader</label>
-                                <input type="email" id="email1" name="email1" class="input form-control" value="{{ user.email }}" required readonly>
+                                <input type="email" id="email1" name="email1" class="input form-control" value="{{ user.email }}" required  >
                             </div>
                             <div class="group">
                                 <label for="college1" class="label">College of Team Leader</label>
-                                <input type="text" id="college1" name="college1" class="input form-control" value="{{ user.college }}" required readonly>
+                                <input type="text" id="college1" name="college1" class="input form-control" value="{{ user.college }}" required  >
+                            </div>
+                            <div class="group">
+                                <label for="department1" class="label">Department of Team Leader</label>
+                                <input type="text" id="department1" name="department1" class="input form-control" value="{{ user.department }}" required  >
                             </div>
                             <div class="group">
                                 <label for="phone1" class="label">Phone No. of Team Leader (10 digits)</label>
-                                <input type="tel" id="phone1" name="phone1" class="input form-control" value="{{ user.phone }}" required readonly>
+                                <input type="tel" id="phone1" name="phone1" class="input form-control" value="{{ user.phone }}" required  >
                             </div>
                             <div class="group">
                                 <label for="github1" class="label">Github Profile (Url)</label>
@@ -512,6 +508,10 @@
                             <div class="group">
                                 <label for="college2" class="label">College of Team member 2</label>
                                 <input type="text" id="college2" name="college2" class="input form-control" required>
+                            </div>
+                            <div class="group">
+                                <label for="department2" class="label">Department of Team member 2</label>
+                                <input type="text" id="department2" name="department2" class="input form-control" value="" required>
                             </div>
                             <div class="group">
                                 <label for="phone2" class="label">Phone No. of Team member 2 (10 digits)</label>
@@ -548,6 +548,10 @@
                                 <input type="text" id="college3" name="college3" class="input form-control" required>
                             </div>
                             <div class="group">
+                                <label for="department3" class="label">Department of Team member 3</label>
+                                <input type="text" id="department3" name="department3" class="input form-control" value="" required>
+                            </div>
+                            <div class="group">
                                 <label for="phone3" class="label">Phone No. of Team member 3 (10 digits)</label>
                                 <input type="tel" pattern="[0-9]{10}" id="phone3" name="phone3" class="input form-control" required>
                             </div>
@@ -580,6 +584,10 @@
                             <div class="group">
                                 <label for="college4" class="label">College of Team member 4</label>
                                 <input type="text" id="college4" name="college4" class="input form-control" required>
+                            </div>
+                            <div class="group">
+                                <label for="department4" class="label">Department of Team member 4</label>
+                                <input type="text" id="department4" name="department4" class="input form-control" value="" required>
                             </div>
                             <div class="group">
                                 <label for="phone4" class="label">Phone No. of Team member 4 (10 digits)</label>
@@ -646,6 +654,8 @@
             let temp_email = document.getElementById('email4');
             let temp_name = document.getElementById('name4');
             let temp_college = document.getElementById('college4');
+            let temp_dept = document.getElementById('department4');
+
             let temp_phone = document.getElementById('phone4');
             let temp_github = document.getElementById('github4');
 
@@ -653,6 +663,8 @@
             temp_email.style.visibility = 'hidden';
             temp_name.style.visibility = 'hidden';
             temp_college.style.visibility = 'hidden';
+            temp_dept.style.visibility = 'hidden';
+
             temp_phone.style.visibility = 'hidden';
             temp_github.style.visibility = 'hidden';
 
@@ -660,6 +672,8 @@
             temp_email.value = 'aimsa.pccoepune.org'
             temp_name.value = 'Nan'
             temp_college.value = 'Nan'
+            temp_dept.value = 'Nan'
+
             temp_phone.value = 'Nan'
             temp_github.value = 'Nan'
 
@@ -720,7 +734,7 @@
                     type: 'GET',
                     data: { email: document.getElementById(`email${currentPage}`).value },
                     success: function (data) {
-                        if (data.exists && !(document.getElementById(`email${currentPage}`).value === '')) {
+                        if (data.error=='Member already registered for the event.' && !(document.getElementById(`email${currentPage}`).value === '')) {
                             swal("Oops !", data.error, "error");
                         } else {
                             currentPage += 1;
@@ -743,7 +757,7 @@
                                     // console.log('Form data submitted:', nonEmptyEmails);
                                 } else {
                                     // Prompt for payment
-                                    swal("Wait", 'At least one member is not from PCCOE. Proceed with payment.', "warning");
+                                    swal("Wait", 'At least one member is not from PCCOE. Proceed with payment. (Incase member belong to PCCOE ,use College Email)', "warning");
                                     // Show the payment section
                                     const paymentSection = document.getElementById('paymentSection');
                                     if (paymentSection) {
@@ -792,6 +806,7 @@
             if (paymentScreenshotFile) {
                 formData.append('paymentScreenshot', paymentScreenshotFile, paymentScreenshotFile.name);
             }
+            swal('Proceed','Submitting your form , you will recieve a Registration Email shortly','info');
             $.ajax({
                 url: '/submitForm/hackmatrix',
                 type: 'POST',
@@ -801,8 +816,8 @@
             })
                 .then(function (response) {
                     // Handle success
-                    swal("Success", "Registration done successfully", "success");
-                    console.log('Server response:', response);
+                    swal("Success", "Form Submitted Successfully", "success");
+                    // console.log('Server response:', response);
 
                     // Enable the submit button
                     submitButton.disabled = false;

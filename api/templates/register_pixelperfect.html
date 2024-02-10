@@ -223,15 +223,7 @@
                                 </a></li>
                               <li><a href="{{ url_for('sponsors') }}"><b>Sponsors</b>
                                 </a></li>
-                            <!-- {% if current_user.is_authenticated %} -->
-                           
-                            <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span> <b>Profile</b></a></li>
-                             <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>
-                                    <b>Logout</b> </a></li>
-                            <!-- {% else %} -->
-                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> <b>Login</b>
-                                </a></li>
-                            <!-- {% endif %} -->
+
                         </div>
                     </ul>
                 </div>
@@ -249,29 +241,29 @@
                                  <div class="group">
                                      <label for="name">Name</label>
                                      <input type="text" class="form-control input" name="Name" id="name"
-                                         placeholder="Name" value="{{ user.name }}" required readonly>
+                                         placeholder="Name" value="{{ user.name }}" required    >
+                                 </div>
+                                 <div class="group">
+                                     <label for="email">Email</label>
+                                     <input type="email" class="form-control input" name="Email" id="email"
+                                         placeholder="Email" value="{{ user.email }}" required    >
                                  </div>
                                  <div class="group">
                                      <label for="college">College</label>
                                      <input type="text" class="form-control input" name="College" id="college"
-                                         placeholder="College" value="{{ user.college }}" required readonly>
+                                         placeholder="College" value="{{ user.college }}" required    >
                                  </div>
      
                                  <div class="group">
                                     <label for="dept">Department</label>
                                     <input type="text" class="form-control input" name="Department" id="department"
-                                         placeholder="Department" value="{{ user.department }}" required readonly>
-                                 </div>
-                                 <div class="group">
-                                     <label for="email">Email</label>
-                                     <input type="email" class="form-control input" name="Email" id="email"
-                                         placeholder="Email" value="{{ user.email }}" required readonly>
+                                         placeholder="Department" value="{{ user.department }}" required    >
                                  </div>
      
                                  <div class="group">
                                      <label for="tel">Phone</label>
                                      <input type="number" name="Phone" class="form-control input" id="tel"
-                                         placeholder="Contact Number" value="{{ user.phone }}" required readonly>
+                                         placeholder="Contact Number" value="{{ user.phone }}" required    >
                                  </div>
      
                                  <!-- <input type="hidden" name="event" value="neurodrain"> -->
@@ -326,7 +318,7 @@ function validateForm(event) {
         type: 'GET',
         data: { email: document.getElementById('email').value },
         success: function (data) {
-            if (data.exists && !(document.getElementById('email').value === '')) {
+            if (false && !(document.getElementById('email').value === '')) {
                 swal('Error',data.error,'warning');
             } 
             else {
@@ -335,7 +327,7 @@ function validateForm(event) {
                     submitForm();
                 } else {
                     // Prompt for payment
-                    swal('Wait','Member is not from PCCOE. Proceed with payment.','warning');
+                    swal('Wait','Member is not from PCCOE. Proceed with payment. (Incase you belong to PCCOE ,use College Email)','warning');
                     event.preventDefault();
                     // Show the payment section
                     const paymentSection = document.getElementById('paymentSection');
@@ -370,7 +362,7 @@ function submitForm() {
     submitButton.disabled = true;
     const formData = new FormData(document.getElementById('regForm'));
 
-    swal('Proceed','Submitting your form','info');
+    swal('Proceed','Submitting your form , you will recieve a Registration Email shortly','info');
 
     // Append the payment screenshot to the form data
     formData.append('paymentScreenshot', paymentScreenshot);
@@ -384,7 +376,7 @@ function submitForm() {
         processData: false,
         success: function (data) {
             // Handle success, e.g., show a success message
-            swal("Success", "Registration done successfully", "success");
+            swal("Success", "Form Submitted Successfully", "success");
             submitButton.disabled = false;
             window.location.href = '/events';
 

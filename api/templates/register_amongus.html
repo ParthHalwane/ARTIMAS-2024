@@ -220,15 +220,8 @@
                                 </a></li>
                               <li><a href="{{ url_for('sponsors') }}"><b>Sponsors</b>
                                 </a></li>
-                            <!-- {% if current_user.is_authenticated %} -->
                             
-                            <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span> <b>Profile</b></a></li>
-                            <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>
-                                    <b>Logout</b> </a></li>
-                            <!-- {% else %} -->
-                            <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span> <b>Login</b>
-                                </a></li>
-                            <!-- {% endif %} -->
+                            
                         </div>
                     </ul>
                 </div>
@@ -246,29 +239,29 @@
                                  <div class="group">
                                      <label for="name">Name</label>
                                      <input type="text" class="form-control input" name="Name" id="name"
-                                         placeholder="Name" value="{{ user.name }}" required readonly>
+                                         placeholder="Name" value="{{ user.name }}" required     >
+                                 </div>
+                                 <div class="group">
+                                     <label for="email">Email</label>
+                                     <input type="email" class="form-control input" name="Email" id="email"
+                                         placeholder="Email" value="{{ user.email }}" required     >
                                  </div>
                                  <div class="group">
                                      <label for="college">College</label>
                                      <input type="text" class="form-control input" name="College" id="college"
-                                         placeholder="College" value="{{ user.college }}" required readonly>
+                                         placeholder="College" value="{{ user.college }}" required     >
                                  </div>
      
                                  <div class="group">
                                     <label for="dept">Department</label>
                                     <input type="text" class="form-control input" name="Department" id="department"
-                                         placeholder="Department" value="{{ user.department }}" required readonly>
-                                 </div>
-                                 <div class="group">
-                                     <label for="email">Email</label>
-                                     <input type="email" class="form-control input" name="Email" id="email"
-                                         placeholder="Email" value="{{ user.email }}" required readonly>
+                                         placeholder="Department" value="{{ user.department }}" required     >
                                  </div>
      
                                  <div class="group">
                                      <label for="tel">Phone</label>
                                      <input type="number" name="Phone" class="form-control input" id="tel"
-                                         placeholder="Contact Number" value="{{ user.phone }}" required readonly>
+                                         placeholder="Contact Number" value="{{ user.phone }}" required     >
                                  </div>
      
                                  <!-- <input type="hidden" name="event" value="neurodrain"> -->
@@ -323,7 +316,7 @@ function validateForm(event) {
         type: 'GET',
         data: { email: document.getElementById('email').value },
         success: function (data) {
-            if (data.exists && !(document.getElementById('email').value === '')) {
+            if (data.error!='Member does not have an account yet' && !(document.getElementById('email').value === '')) {
                 swal('Error',data.error,'warning');
             } 
             else {

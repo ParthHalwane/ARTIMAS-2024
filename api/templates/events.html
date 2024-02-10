@@ -60,7 +60,7 @@
 
     #toggleLeft,
     #toggleRight {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         background: none;
         border: none;
         color: white;
@@ -530,18 +530,6 @@
                             </a></li>
                         <li><a href="{{ url_for('sponsors') }}"><b>Sponsors</b>
                             </a></li>
-                        <li><a href="{{url_for('profile')}}"><span class="glyphicon glyphicon-user"></span>
-                                <b>Profile</b></a></li>
-                        <!-- {% if current_user.is_authenticated %} -->
-                        <li><a href="{{ url_for('logout') }}"><span class="glyphicon glyphicon-log-out"></span>
-                                <b>Logout</b> </a></li>
-
-
-                        <!-- {% else %} -->
-                        <li><a href="{{ url_for('login') }}"><span class="glyphicon glyphicon-log-in"></span>
-                                <b>Login</b>
-                            </a></li>
-                        <!-- {% endif %} -->
                     </div>
                 </ul>
             </div>
@@ -566,12 +554,14 @@
         <div id="canvas_container"></div>
         <button id="toggleLeft" onclick="toggleTextures(-1)"><i class="fa fa-chevron-left"></i></button>
         <button id="toggleRight" onclick="toggleTextures(1)"><i class="fa fa-chevron-right"></i></button>
-        <div class="globe-label" id="globeLabel1" style="display: block;">Houdini Heist</div>
-        <div class="globe-label" id="globeLabel2">Hack Matrix</div>
-        <div class="globe-label" id="globeLabel3">Among Us</div>
-        <div class="globe-label" id="globeLabel4">Neuro Drain</div>
-        <div class="globe-label" id="globeLabel5">Adrenaline Rush</div>
-        <div class="globe-label" id="globeLabel6">Pixel Perfect</div>
+        <div class="globe_label_cont">
+            <div class="globe-label" id="globeLabel1" style="display: block;">Houdini Heist</div>
+            <div class="globe-label" id="globeLabel2">Hack Matrix</div>
+            <div class="globe-label" id="globeLabel3">Among Us</div>
+            <div class="globe-label" id="globeLabel4">Neuro Drain</div>
+            <div class="globe-label" id="globeLabel5">Adrenaline Rush</div>
+            <div class="globe-label" id="globeLabel6">Pixel Perfect</div>
+        </div>
 
         <div id="posterDiv" style="display: none; position: absolute;">
             <div class="blog-slider">
@@ -597,7 +587,8 @@
     </div>
 
     <div class="logo-details">
-        <a href="{{ url_for('contact') }}"><i class="fas fa-phone contact-icon" style="color: white; border:2px solid white ;border-radius: 50%; padding: 4px;"></i></a>
+        <a href="{{ url_for('contact') }}"><i class="fas fa-phone contact-icon"
+                style="color: white; border:2px solid white ;border-radius: 50%; padding: 4px;"></i></a>
         <!-- <span class="logo_name">AiMSA</span> -->
     </div>
 
@@ -841,7 +832,7 @@
 
 
         function toggleTextures(direction) {
-            // document.querySelector('.tutorial-container').style.display = 'none';
+            document.querySelector('.tutorial-container').style.display = 'none';
             completeTutorial()
             if (localStorage.getItem('tutorialCompleted') === 'true') {
                 document.querySelector('.tutorial-container').style.display = 'none';
@@ -901,6 +892,8 @@
             document.querySelector('.blog-slider__title').innerText = postTitles[p];
             document.querySelector('.blog-slider__code').innerText = postDates[p];
             document.querySelector('.blog-slider__text').innerText = postContents[p];
+            // document.querySelector('.globe-label').style.display = '';
+
             if (p == 4) {
                 document.querySelector('.blog-slider__button1').style.display = 'none';
                 // document.querySelector('.blog-slider__button2').style.display = 'none';
@@ -927,11 +920,17 @@
             // Check camera distance and make the div visible accordingly
             const distance = camera.position.distanceTo(sphereBg.position);
             const newVisibility = distance < 250;
+            if (distance > 250) {
+                document.querySelector('.globe_label_cont').style.display = 'block';
+            }
+
 
             if (newVisibility !== posterDivVisible) {
                 posterDivVisible = newVisibility;
                 const posterDiv = document.getElementById('posterDiv');
                 posterDiv.style.display = posterDivVisible ? 'flex' : 'none';
+                document.querySelector('.globe_label_cont').style.display = 'none';
+
             }
 
             controls.update();
@@ -989,7 +988,7 @@
 
         let currentStep = 1;
 
-        // document.querySelector('.tutorial-container').style.display = 'flex';
+        document.querySelector('.tutorial-container').style.display = 'none';
 
         // Check if the tutorial has been completed
 
