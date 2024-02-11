@@ -809,6 +809,7 @@ def submit_hackmatrix():
                     'email': form_data.get(f'email{i}', ''),
                     'college': form_data.get(f'college{i}', ''),
                     'phone': form_data.get(f'phone{i}', ''),
+                    'github' : form_data.get(f'github{i}', ''),
                 }
 
             else:
@@ -817,6 +818,7 @@ def submit_hackmatrix():
                     'email': '',
                     'college': '',
                     'phone': '',
+                    'github' : '',
                 }
             members.append(member_entry)
         if c == 4:
