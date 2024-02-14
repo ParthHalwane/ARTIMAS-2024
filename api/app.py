@@ -659,7 +659,7 @@ def submit_houdiniheist():
             # print(len(list(userx)))
 
             email = request.form.get(f'email{i}')
-            if member_email != 'aimsa.pccoepune.org':
+            if member_email != 'aimsa.pccoepune.org1':
                 if len(list(userx)) == 0:
                     name = request.form.get(f'name{i}')
                     email = request.form.get(f'email{i}')
