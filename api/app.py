@@ -28,9 +28,9 @@ app.config['MONGO_URI'] = 'mongodb://parthhalwane:artimas2024pccoe@ac-yjnwgro-sh
 # app.config['MAIL_DEFAULT_SENDER'] = 'kolekarp04082003@gmail.com'
 
 sender_emails = {'admin': 'artimas.pccoeaimsa@gmail.com', 'hackmatrix': 'hackmatrix.artimas@gmail.com', 'cyberneticvision': 'cyberneticvisions.artimas@gmail.com',
-                 'houdiniheist': 'houdiniheist.artimas@gmail.com', 'pixelperfect': 'pixelperfect.artimas@gmail.com', 'neurodrain': 'neurodrain.artimas@gmail.com', 'amongus': 'amongus.artimas@gmail.com'}
+                 'houdiniheist': 'artimas.pccoeaimsa@gmail.com', 'pixelperfect': 'pixelperfect.artimas@gmail.com', 'neurodrain': 'neurodrain.artimas@gmail.com', 'amongus': 'amongus.artimas@gmail.com'}
 sender_passwords = {'admin': 'nyia jzxb tdhx ufce', 'hackmatrix': 'yoiv gjgh prdy hoom', 'cyberneticvision': 'ebua amef adxt yhsi',
-                    'houdiniheist': 'agyp chut sqwr mnjo', 'pixelperfect': 'cunb opdg ivph ygpl', 'neurodrain': 'gkts zorh dkga osdr', 'amongus': 'rpri zdqu laob wbva'}
+                    'houdiniheist': 'nyia jzxb tdhx ufce', 'pixelperfect': 'cunb opdg ivph ygpl', 'neurodrain': 'gkts zorh dkga osdr', 'amongus': 'rpri zdqu laob wbva'}
 
 client = MongoClient(app.config['MONGO_URI'])
 db = client.artimas
