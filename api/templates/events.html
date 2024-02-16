@@ -629,7 +629,7 @@
 
         let postTitles = [
             "Houdini Heist",
-            "Hack Matrix",
+            "Hack Matrix (Registrations Closed)",
             "Among Us",
             "Neuro Drain",
             "Adrenaline Rush",
@@ -649,7 +649,7 @@
 
         let postContents = [
             "Join Houdini's Quest , Solve Puzzles with Zest, Break free from the Heist, be put to the Test",
-            "Enter the Matrix where Innovation meets Technology (Food is only available for offline round)",
+            "Enter the Matrix where Innovation meets Technology (Food is only available for offline round) ",
             "There is an Imposter Among Us",
             'Gear up for Neuro Drain cause its time for Big Brain',
             "Dive into the World Beyond Reality. (On-Spot Registerations)",
@@ -894,7 +894,7 @@
             document.querySelector('.blog-slider__text').innerText = postContents[p];
             // document.querySelector('.globe-label').style.display = '';
 
-            if (p == 4) {
+            if (p == 4 || p == 1) {
                 document.querySelector('.blog-slider__button1').style.display = 'none';
                 // document.querySelector('.blog-slider__button2').style.display = 'none';
                 document.querySelector('.blog-slider__button2').href = rulebooks[p];
