@@ -242,7 +242,7 @@ def pixelperfect():
     return render_template('register_pixelperfect.html', user=current_user)
 
 
-@app.route('/hackmatrix')
+@app.route('/hackmatrix11')
 # @login_required
 def hackmatrix():
     return render_template('register_hackmatrix.html', user=current_user)
