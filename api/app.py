@@ -224,13 +224,13 @@ def calendar():
 def sponsors():
     return render_template('sponsors.html')
   
-@app.route('/houdiniheist')
+@app.route('/houdiniheist1')
 # @login_required
 def houdini_heist():
     return render_template('register_houdiniheist.html', user=current_user)
 
 
-@app.route('/neurodrain')
+@app.route('/neurodrain1')
 # @login_required
 def neurodrain():
     return render_template('register_neurodrain.html', user=current_user)
@@ -248,7 +248,7 @@ def hackmatrix():
     return render_template('register_hackmatrix.html', user=current_user)
 
 
-@app.route('/amongus')
+@app.route('/amongus1')
 # @login_required
 def amongus():
     return render_template('register_amongus.html', user=current_user)
