@@ -572,16 +572,16 @@
                     </div>
                     <div class="blog-slider__content">
                         <span class="blog-slider__code">23 February 2024</span>
-                        <div class="blog-slider__title">Houdini Heist</div>
+                        <div class="blog-slider__title">Houdini Heist (Registrations Closed)</div>
                         <div class="blog-slider__text">Join Houdini's Quest , Solve Puzzles with Zest, Break free from
                             the Heist, be put to the Test</div>
-                        <a href="/houdiniheist" class="blog-slider__button1">Register</a>
+                        <a href="/houdiniheist" class="blog-slider__button1" style="display: none;">Register</a>
                         <a href="https://drive.google.com/file/d/1OxKinSvDbYXrBrgSWatVf75YABkCfMA-/view?usp=drive_link"
                             class="blog-slider__button2">Rulebook</a>
 
                     </div>
                 </div>
-
+ 
             </div>
         </div>
     </div>
@@ -628,10 +628,10 @@
         ];
 
         let postTitles = [
-            "Houdini Heist",
+            "Houdini Heist (Registrations Closed)",
             "Hack Matrix (Registrations Closed)",
-            "Among Us",
-            "Neuro Drain",
+            "Among Us (Registrations Closed)",
+            "Neuro Drain (Registrations Closed)",
             "Adrenaline Rush",
             "Pixel Perfect"
             // Add more titles as needed
@@ -894,7 +894,7 @@
             document.querySelector('.blog-slider__text').innerText = postContents[p];
             // document.querySelector('.globe-label').style.display = '';
 
-            if (p == 4 || p == 1) {
+            if (p == 4 || p == 1 || p == 2 || p == 0 || p == 3) {
                 document.querySelector('.blog-slider__button1').style.display = 'none';
                 // document.querySelector('.blog-slider__button2').style.display = 'none';
                 document.querySelector('.blog-slider__button2').href = rulebooks[p];
