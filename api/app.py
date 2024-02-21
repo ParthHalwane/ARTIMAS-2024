@@ -254,7 +254,7 @@ def amongus():
     return render_template('register_amongus.html', user=current_user)
 
 
-@app.route('/submitForm/neurodrain', methods=['POST'])
+@app.route('/submitForm/neurodrain1', methods=['POST'])
 def submit_neurodrain():
     event = 'neurodrain'
     event_collection = db[event]
@@ -370,7 +370,7 @@ def submit_neurodrain():
         return jsonify({'success': False, 'message': 'Error storing form data.'}), 500
 
 
-@app.route('/submitForm/amongus', methods=['POST'])
+@app.route('/submitForm/amongus1', methods=['POST'])
 def submit_amongus():
     event = 'amongus'
     event_collection = db[event]
@@ -595,7 +595,7 @@ def submit_pixelperfect():
         return jsonify({'success': False, 'message': 'Error storing form data.'}), 500
 
 
-@app.route('/submitForm/houdiniheist', methods=['POST'])
+@app.route('/submitForm/houdiniheist1', methods=['POST'])
 def submit_houdiniheist():
     event = 'houdiniheist'
     usersdb = db['users']
@@ -724,7 +724,7 @@ def submit_houdiniheist():
         return jsonify({'success': False, 'message': 'Error storing form data.'}), 500
 
 
-@app.route('/submitForm/hackmatrix', methods=['POST'])
+@app.route('/submitForm/hackmatrix1', methods=['POST'])
 def submit_hackmatrix():
     event = 'hackmatrix'
     usersdb = db['users']
