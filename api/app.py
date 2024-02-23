@@ -236,7 +236,7 @@ def neurodrain():
     return render_template('register_neurodrain.html', user=current_user)
 
 
-@app.route('/pixelperfect')
+@app.route('/pixelperfect1')
 # @login_required
 def pixelperfect():
     return render_template('register_pixelperfect.html', user=current_user)
@@ -486,7 +486,7 @@ def submit_amongus():
         return jsonify({'success': False, 'message': 'Error storing form data.'}), 500
     
 
-@app.route('/submitForm/pixelperfect', methods=['POST'])
+@app.route('/submitForm/pixelperfect1', methods=['POST'])
 def submit_pixelperfect():
     event = 'pixelperfect'
     event_collection = db[event]
